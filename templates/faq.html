@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        {% include "components/links.html" %}
+    </head>
+
+    <body>
+        {% include "components/header.html" %}
+        <main>
+            <div id="article-title">
+                <h1>Frequently Asked Questions</h1>
+            </div>
+            <div id="faq-table">
+            </div>
+        </main>
+        {% include "components/footer.html" %}
+    </body>
+</html>
+
+
+<style>
+
+.question {
+    font-size: 20px;
+    font-weight: bolder;
+    margin-top: 20px;
+}
+
+.answer {
+    font-size: 17px;
+}
+
+</style>
+
+
+
+<script>
+
+const faq_table = document.querySelector("#faq-table") 
+
+const qaList = {
+    "What purpose of this site?": "This site was made for educational purposes and especially for my resume. I thought it would be cool if i made url shortener without need to registration, with simple design and only one purpose.",
+    "Is there any payment?": "Nah, its free and it would be stupid to pay for smth like that lol",
+    "Can i contact the owner?": `Yeah, check <a href="about">about us</a> page, u can find contacts in there`,
+    "Tf is 'profull.app'": "Its server of my friend, he helps me with learning and other shi",
+    "Can i delete link i made on this site?": "Nope, but if its some super ultimate critical situation i could wipe it from bd",
+    "Do you collect some data/cookies/other shit?": "Only links and nothing else, why would i need it"
+}
+
+for (key of Object.keys(qaList)) {
+    const newQuestion = document.createElement("div")
+    newQuestion.innerHTML = `<div class="question">${key}</div>`
+    faq_table.appendChild(newQuestion)
+
+    const newAnswer = document.createElement("div")
+    newAnswer.innerHTML = `<div class="answer">${qaList[key]}</div>`
+    faq_table.appendChild(newAnswer)
+}
+
+</script>

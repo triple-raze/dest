@@ -1,0 +1,161 @@
+<footer id="footer">
+    <div id="line"></div>
+    <div id="logoanimation"></div>
+    
+    <div id="table">
+        <div id="navigation">
+            <div>                       <span class="title"    >Navigation </span></div> 
+            <div id="navigation-main">  <span class="clickable">Main page  </span></div>
+            <div id="navigation-about"> <span class="clickable">About us   </span></div>
+            <div id="navigation-faq">   <span class="clickable">FAQ        </span></div>
+        </div>
+
+        <div id="links">
+            <div>                          <span class="title"    >Links             </span></div> 
+            <div id="redirect-owner">      <span class="clickable">Owner's github    </span></div>
+            <div id="redirect-repository"> <span class="clickable">Github repository </span></div>
+            <div id="redirect-host">       <span class="clickable">Host              </span></div>
+        </div>
+    </div>
+
+
+
+<style>
+
+#footer {
+    position: relative;
+    
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    height: max(300px, 20vh);
+
+    margin-bottom: -25px;
+
+    background-color: #222831;
+}
+
+#footer > #line {
+    position: absolute;
+    width: 60%;
+    height: 1px;
+
+    background-color: #EEEEEE;
+    
+    top: 210px;
+
+    align-self: center;
+}
+
+#footer > #logoanimation {
+    position: absolute;
+    white-space: nowrap;
+    top: 260px;
+}
+
+#footer > #logoanimation > * {
+    margin-right: 8px;
+}
+
+
+#footer > #table {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    gap: calc(25vw); 
+
+    left: 50%;
+    transform: translateX(-50%);
+    top: 50px;
+
+    color: #EEEEEE;
+}
+
+#table > * > * > .title {
+    font-weight: bolder;
+    height: 30px;
+    color: #EEEEEE;
+}
+
+#table > #links {
+    white-space: nowrap;
+    margin-right: 30vw;
+}
+
+#table > #navigation {
+    white-space: nowrap;
+    margin-left: 30vw;
+}
+
+#table > * > * {
+    margin-bottom: 5px;
+}
+
+#table > * > * > *:not(.title):hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+</style>
+
+
+
+<script>
+
+document.querySelector("#navigation-main")
+.addEventListener("click", () => {
+    if (window.location.pathname != "/") {window.location.href = "/"}
+})
+
+document.querySelector("#navigation-about")
+.addEventListener("click", () => {
+    if (window.location.pathname != "/about") {window.location.href = "/about"}
+})
+
+document.querySelector("#navigation-faq")
+.addEventListener("click", () => {
+    if (window.location.pathname != "/faq") {window.location.href = "/faq"}
+})
+
+
+document.querySelector("#redirect-owner")
+.addEventListener("click", () => {
+    window.location.href = "https://github.com/triple-raze"
+})
+
+document.querySelector("#redirect-repository")
+.addEventListener("click", () => {
+    window.location.href = "https://github.com/triple-raze/dest"
+})
+
+document.querySelector("#redirect-host")
+.addEventListener("click", () => {
+    window.location.href = "https://profull.app"
+})
+
+const animation = document.querySelector("#logoanimation")
+
+for (let i=0; i<=120; i++) {
+    const newlogo = document.createElement("img")
+    newlogo.src = "../../src/logo.svg"
+    newlogo.width = 50
+
+    animation.appendChild(newlogo)
+}
+
+let pos = 0
+function movelogo() {
+    pos += 1
+    if (pos == 58) {pos = 0}
+    animation.style.transform = `translateX(-${Math.round(pos)}px)`
+    requestAnimationFrame(movelogo)
+}
+    
+requestAnimationFrame(movelogo)
+
+</script>
+
+</footer>

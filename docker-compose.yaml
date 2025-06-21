@@ -1,0 +1,24 @@
+services:
+  app:
+    build: .
+    env_file: .env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./initdb.sql:/docker-entrypoint-initdb.d/initdb.sql
+    env_file: .env
+    environment:
+      POSTGRES_DB: ${ENV_POSTGRES_DB}
+      POSTGRES_USER: ${ENV_POSTGRES_USER}
+      POSTGRES_PASSWORD: ${ENV_POSTGRES_PASSWORD}
+    ports:
+      - "${ENV_POSTGRES_PORT:+${ENV_POSTGRES_PORT}:5432}"
+
+volumes:
+  postgres_data:

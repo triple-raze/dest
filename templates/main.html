@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        {% include "components/links.html" %}
+    </head>
+
+    <body>
+        {% include "components/header.html" %}
+        <main>
+            <div id="article-title">
+                <h1> Create short URL fast. No registration needed.</h1>
+                <h3 class="lighttext"> Unlike other shorteners, this site doesnt save your data, cookie or any personal information. This site was made for educational purposes only.</h3>
+            </div>
+            <div id="input-container">
+                <input id="input-field" autocomplete="off">
+                <div id="input-button">Shortify</div>
+            </div>
+            <div id="output-container">
+                <div id="output-status"></div>
+                <a id="output-description"></a>
+            </div>
+        </main>
+        {% include "components/footer.html" %}
+    </body>
+</html>
+
+
+
+<style>
+            
+main > #input-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    width: 100%;
+}
+
+main > #output-container {
+    text-align: center;
+    margin-top: 30px;
+}
+
+main > #input-container > #input-field {
+    width: 30%;
+    min-width: 250px;
+    height: 50px;
+    font-size: larger;
+    outline: none;
+}
+
+main > #input-container > #input-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 10%;
+    min-width: 100px;
+    height: 50px;
+    
+    color: #EEEEEE;
+    background-color: #222831;
+    
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+main > #input-container > #input-button:hover {
+    background-color: #2e353f;
+}
+
+main > #output-container > #output-status {
+    font-size: 18px;
+}
+
+</style>
+
+
+
+<script>
+
+document.querySelector("#input-button")
+.addEventListener("click", () => {
+
+    const link = document.querySelector("#input-field").value
+    const status = document.querySelector("#output-status")
+    const description = document.querySelector("#output-description")
+
+    fetch("/generate", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({origin_url: link})
+    })
+    .then(data => data.json())
+    .then(data => {
+        short_url = data.short_url
+        if (short_url) {
+            status.textContent = "Success!"
+            status.style.color = "green"
+            description.innerHTML = `<a id="output-description" href="${short_url}">${window.location.host}/${short_url}</a>`
+        }
+        else {
+            status.textContent = "Wrong URL!" 
+            status.style.color = "red"
+            description.innerHTML = `<div id="output-description">Try pasting your URL again.</div>"`
+        }
+    })
+    .catch(error => console.log(error))
+})
+
+</script>

@@ -1,2 +1,6 @@
 fastapi[default]
-psycopg2
+jinja2
+psycopg2-binary
+dotenv
+uvicorn
+nanoid
