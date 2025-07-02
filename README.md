@@ -13,7 +13,7 @@
 ENV_POSTGRES_DB="my_cool_db_228"
 ENV_POSTGRES_USER="super_user_epta"
 ENV_POSTGRES_PASSWORD="555123666"
-ENV_POSTGRES_PORT="5432"	# лучше оставить таким
+ENV_POSTGRES_PORT="5432"	
 ```
 
 2. Выполнить `docker-compose build`
