@@ -4,3 +4,5 @@ psycopg2-binary
 dotenv
 uvicorn
 nanoid
+prometheus_client
+prometheus_fastapi_instrumentator

@@ -11,14 +11,22 @@ services:
     image: postgres:15
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./initdb.sql:/docker-entrypoint-initdb.d/initdb.sql
+      - ./database:/docker-entrypoint-initdb.d
     env_file: .env
     environment:
       POSTGRES_DB: ${ENV_POSTGRES_DB}
       POSTGRES_USER: ${ENV_POSTGRES_USER}
       POSTGRES_PASSWORD: ${ENV_POSTGRES_PASSWORD}
     ports:
-      - "${ENV_POSTGRES_PORT:+${ENV_POSTGRES_PORT}:5432}"
+      - "${ENV_POSTGRES_PORT:-5432}:5432"
+
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - prometheus_data:/prometheus
+    ports:
+      - "9090:9090"
 
 volumes:
   postgres_data:
+  prometheus_data:

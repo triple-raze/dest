@@ -5,7 +5,6 @@ from urllib.parse import urlparse
 
 from fastapi import APIRouter, Request, HTTPException
 from fastapi.responses import RedirectResponse
-from fastapi.templating import Jinja2Templates
 
 api_router = APIRouter()
 
@@ -22,7 +21,7 @@ async def generate_url(request: Request):
     if not (parsed_url.scheme and parsed_url.netloc):
         return {"short_url": None}
     
-    while short_url in execsql("SELECT * FROM links"):
+    while short_url in execsql("SELECT short_url FROM links"):
         collision_url = short_url
         short_url = generate(symbols, 5)
         print(f"collision happened: {collision_url} --> {short_url}")

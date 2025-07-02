@@ -8,9 +8,9 @@ conn = psycopg2.connect(
     dbname = getenv('ENV_POSTGRES_DB'),
     user = getenv('ENV_POSTGRES_USER'),
     password = getenv('ENV_POSTGRES_PASSWORD'),
-    host = 'db',
+    host = 'db' # for docker,
+    # host = 'localhost' # for local testing
 )
-
 
 def execsql(query, params=None, firstfield=False):
     result = None
